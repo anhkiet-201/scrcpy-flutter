@@ -1,0 +1,6 @@
+[submodule "scrcpy"]
+	path = scrcpy
+	url = https://github.com/Genymobile/scrcpy.git
+[submodule "scrcpy_flutter_plugin"]
+	path = scrcpy_flutter_plugin
+	url = https://github.com/anhkiet-201/scrcpy_flutter_plugin.git

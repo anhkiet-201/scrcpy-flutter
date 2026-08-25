@@ -1,0 +1,20 @@
+# Build outputs
+.build/
+*.o
+*.dylib
+*.so
+*.dll
+*.exe
+
+# macOS Junk Files
+.DS_Store
+.apple-dns
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# IDE / Editor Files
+.vscode/
+.idea/
