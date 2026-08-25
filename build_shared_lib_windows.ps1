@@ -437,9 +437,9 @@ string(APPEND OPTIONS
     " --enable-avcodec"
     " --enable-avformat"
     " --enable-swresample"
+    " --enable-swscale"
     " --disable-avdevice"
     " --disable-avfilter"
-    " --disable-swscale"
     " --enable-libdav1d"
     " --enable-zlib"
     " --enable-w32threads"
@@ -501,6 +501,7 @@ function Test-MinGWDependencies {
     return (Test-Path -LiteralPath (Join-Path $LibraryDirectory "libavformat.a") -PathType Leaf) `
         -and (Test-Path -LiteralPath (Join-Path $LibraryDirectory "libavcodec.a") -PathType Leaf) `
         -and (Test-Path -LiteralPath (Join-Path $LibraryDirectory "libavutil.a") -PathType Leaf) `
+        -and (Test-Path -LiteralPath (Join-Path $LibraryDirectory "libswscale.a") -PathType Leaf) `
         -and (Test-Path -LiteralPath (Join-Path $LibraryDirectory "libswresample.a") -PathType Leaf) `
         -and (Test-Path -LiteralPath (Join-Path $LibraryDirectory "libdav1d.a") -PathType Leaf) `
         -and (Test-Path -LiteralPath (Join-Path $LibraryDirectory "libzs.a") -PathType Leaf) `
@@ -602,12 +603,13 @@ function Install-MinGWDependencies {
     Write-Host "Building static dependencies for $Triplet..."
     Invoke-NativeCommand -Command $VcpkgExe -Arguments @(
         "install",
-        "ffmpeg[core,avcodec,avformat,dav1d,swresample,zlib]:$Triplet",
+        "ffmpeg[core,avcodec,avformat,dav1d,swresample,swscale,zlib]:$Triplet",
         "sdl3[core]:$Triplet",
         "--host-triplet=$Triplet",
         "--x-install-root=$InstallRoot",
         "--overlay-triplets=$TripletDirectory",
         "--overlay-ports=$OverlayPortsDirectory",
+        "--recurse",
         "--allow-unsupported",
         "--clean-after-build"
     )
